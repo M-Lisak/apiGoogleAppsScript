@@ -27,8 +27,8 @@ app.get('/bd', async (req, res) => {
     const isUserCreate = await UserModel.findOne({ where: { key_API: `${authorization}` } })
     console.log(isUserCreate.dataValues)
 
-    if(isUserCreate && isUserCreate.dataValues.paidUpTo) {
-        console.log("true", true)
+    if(isUserCreate && isUserCreate.dataValues && isUserCreate.dataValues.paidUpTo) {
+        console.log("true", isUserCreate.dataValues.paidUpTo)
         if(isUserCreate.dataValues.paidUpTo.getTime() > new Date().getTime()) {
             console.log("isUserCreate.paidUpTo", isUserCreate.dataValues.paidUpTo)
             //всё збс, можно вернуть true или что-то более интересное
