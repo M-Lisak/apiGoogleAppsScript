@@ -5,7 +5,10 @@ const UserModel = require('./models');
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) =>  res.send('connected!!!!'))
+app.get('/', (req, res) =>  {
+    console.log("req", req)
+    res.send('connected!!!!')
+})
 
 app.get('/bd', async (req, res) => {
     console.log('req.headers', req.query)
