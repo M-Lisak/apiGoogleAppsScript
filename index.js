@@ -5,6 +5,8 @@ const UserModel = require('./models');
 const app = express()
 const port = 3000
 
+apt.get('/', (req, res) =>  res.send('connected!!!!'))
+
 app.get('/bd', async (req, res) => {
     console.log('req.headers', req.query)
     const { keyApi } = req.query || {}
