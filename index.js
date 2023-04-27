@@ -25,7 +25,7 @@ app.get('/bd', async (req, res) => {
     }
     //получаем нашего пользователя
     const isUserCreate = await UserModel.findOne({ where: { key_API: `${authorization}` } })
-    console.log(isUserCreate.dataValues)
+    console.log('isUserCreate', isUserCreate)
 
     if(isUserCreate && isUserCreate.dataValues && isUserCreate.dataValues.paidUpTo) {
         console.log("true", isUserCreate.dataValues.paidUpTo)
