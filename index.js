@@ -11,35 +11,35 @@ app.get('/', (req, res) =>  {
 })
 
 app.get('/bd', async (req, res) => {
-    const { authorization } = req.headers || {}
-    console.log('authorization', authorization)
-    if(!authorization) return
-    //подключаемся к БД
-    try {
-        await sequelize.authenticate()
-        await sequelize.sync()
-        console.log("подключенно к БД")
-    } catch (e) {
-        console.log('error', e)
-        console.log("подключение к БД сломалось")
-    }
-    //получаем нашего пользователя
-    const isUserCreate = await UserModel.findOne({ where: { key_API: `${authorization}` } })
-    console.log(isUserCreate.dataValues)
+    // const { authorization } = req.headers || {}
+    // console.log('authorization', authorization)
+    // if(!authorization) return
+    // //подключаемся к БД
+    // try {
+    //     await sequelize.authenticate()
+    //     await sequelize.sync()
+    //     console.log("подключенно к БД")
+    // } catch (e) {
+    //     console.log('error', e)
+    //     console.log("подключение к БД сломалось")
+    // }
+    // //получаем нашего пользователя
+    // const isUserCreate = await UserModel.findOne({ where: { key_API: `${authorization}` } })
+    // console.log(isUserCreate.dataValues)
 
-    if(isUserCreate && isUserCreate.dataValues.paidUpTo) {
-        console.log("true", true)
-        if(isUserCreate.dataValues.paidUpTo.getTime() > new Date().getTime()) {
-            console.log("isUserCreate.paidUpTo", isUserCreate.dataValues.paidUpTo)
-            //всё збс, можно вернуть true или что-то более интересное
-            res.send(true)
-        } else {
-            //не оплачена подписка
-            res.send('ваша подписка закончилась')
-        }
-    }
-    // else return//ошибку выдать
-    console.log('err')
+    // if(isUserCreate && isUserCreate.dataValues.paidUpTo) {
+    //     console.log("true", true)
+    //     if(isUserCreate.dataValues.paidUpTo.getTime() > new Date().getTime()) {
+    //         console.log("isUserCreate.paidUpTo", isUserCreate.dataValues.paidUpTo)
+    //         //всё збс, можно вернуть true или что-то более интересное
+    //         res.send(true)
+    //     } else {
+    //         //не оплачена подписка
+    //         res.send('ваша подписка закончилась')
+    //     }
+    // }
+    // // else return//ошибку выдать
+    // console.log('err')
     res.send(null)
 })
 
