@@ -7,10 +7,10 @@ const port = 3000
 
 app.get('/', (req, res) =>  {
     console.log("req", req.headers)
-    res.send('connected!!!!')
+    res.send('connected1')
 })
 
-app.get('/bd', async (req, res) => {
+// app.get('/bd', async (req, res) => {
     // const { authorization } = req.headers || {}
     // console.log('authorization', authorization)
     // if(!authorization) return
@@ -40,7 +40,7 @@ app.get('/bd', async (req, res) => {
     // }
     // // else return//ошибку выдать
     // console.log('err')
-    res.send(null)
-})
+    // res.send(null)
+// })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
