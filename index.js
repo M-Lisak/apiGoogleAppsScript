@@ -11,11 +11,9 @@ app.get('/', (req, res) =>  {
 })
 
 app.get('/bd', async (req, res) => {
-    console.log('req.headers', req.query)
-    const { keyApi } = req.query || {}
-    console.log('keyApi', keyApi)
-    // const { keyApi } = req.headers || {}
-    if(!keyApi) return
+    const { authorization } = req.headers || {}
+    console.log('authorization', authorization)
+    if(!authorization) return
     //подключаемся к БД
     try {
         await sequelize.authenticate()
@@ -26,7 +24,7 @@ app.get('/bd', async (req, res) => {
         console.log("подключение к БД сломалось")
     }
     //получаем нашего пользователя
-    const isUserCreate = await UserModel.findOne({ where: { key_API: `${keyApi}` } })
+    const isUserCreate = await UserModel.findOne({ where: { key_API: `${authorization}` } })
     console.log(isUserCreate.dataValues)
 
     if(isUserCreate && isUserCreate.dataValues.paidUpTo) {
