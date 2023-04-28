@@ -7,7 +7,7 @@ const port = 3000
 
 app.get('/', (req, res) =>  {
     console.log("req", req.headers)
-    res.send('connected1')
+    res.send('connected!')
 })
 
 app.get('/bd', async (req, res) => {
