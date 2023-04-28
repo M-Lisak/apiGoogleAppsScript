@@ -10,6 +10,8 @@ app.get('/', (req, res) =>  {
     res.send('connected!')
 })
 
+//в ответ отправлять объект с полем isPaid
+
 app.get('/bd', async (req, res) => {
     const { authorization } = req.headers || {}
     console.log('authorization', authorization)
@@ -31,15 +33,15 @@ app.get('/bd', async (req, res) => {
         console.log("true", isUserCreate.dataValues.paidUpTo)
         if(isUserCreate.dataValues.paidUpTo.getTime() > new Date().getTime()) {
             //всё збс, можно вернуть true или что-то более интересное
-            res.send(`всё в порядке, подписка оплачена до${isUserCreate.dataValues.paidUpTo}`)
+            // res.send(`всё в порядке, подписка оплачена до${isUserCreate.dataValues.paidUpTo}`)
+            res.json({ isPaid: true, description: `Подписка оплачена до${isUserCreate.dataValues.paidUpTo}` })
         } else {
             //не оплачена подписка
-            res.send('ваша подписка закончилась')
+            res.json({ isPaid: false, description: `Закончилось действие подписки`})
         }
     }
-    // else return//ошибку выдать
     console.log('err')
-    res.send(null)
+    res.json({ isPaid: false, description: `Пользователь не найден` })
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
