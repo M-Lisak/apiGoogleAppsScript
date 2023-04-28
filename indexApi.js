@@ -30,9 +30,8 @@ app.get('/bd', async (req, res) => {
     if(isUserCreate && isUserCreate.dataValues && isUserCreate.dataValues.paidUpTo) {
         console.log("true", isUserCreate.dataValues.paidUpTo)
         if(isUserCreate.dataValues.paidUpTo.getTime() > new Date().getTime()) {
-            console.log("isUserCreate.paidUpTo", isUserCreate.dataValues.paidUpTo)
             //всё збс, можно вернуть true или что-то более интересное
-            res.send(true)
+            res.send(`всё в порядке, подписка оплачена до${isUserCreate.dataValues.paidUpTo}`)
         } else {
             //не оплачена подписка
             res.send('ваша подписка закончилась')
